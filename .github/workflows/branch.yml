@@ -89,12 +89,12 @@ jobs:
             export DOCKER_BRANCH="$DOCKER_BRANCH"
             export DOCKER_REGISTRY="$DOCKER_REGISTRY"
       
-            cd /var/docker/dashboard-v2/\$DOCKER_BRANCH
+            cd /var/docker/test/\$DOCKER_BRANCH
             git pull origin \$DOCKER_BRANCH
             docker compose --file docker-compose-branch.yml pull
             docker login -u "$DOCKER_LOGIN" -p "$DOCKER_PASSWD" \$DOCKER_REGISTRY
       
             TEST_KEY="$TEST_KEY" \
             HOSTNAME="$HOSTNAME" \
-            docker compose --project-name \$DOCKER_BRANCH-dashboard --file docker-compose-branch.yml up -d
+            docker compose --project-name \$DOCKER_BRANCH-test --file docker-compose-branch.yml up -d
           EOF
