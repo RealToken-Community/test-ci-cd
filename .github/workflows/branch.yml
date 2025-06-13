@@ -3,9 +3,8 @@ name: Test and deploy to branch
 on:
   push:
     branches:
-      - master
-      - preprod
-      - develop
+      - main
+      - staging
 
 jobs:
   validate:
@@ -77,9 +76,9 @@ jobs:
           DOCKER_PASSWD: ${{ secrets.DOCKER_PASSWD }}
           TEST_KEY: ${{ secrets.TEST_KEY }}
         run: |
-          if [[ "$DOCKER_BRANCH" == "master" ]]; then
+          if [[ "$DOCKER_BRANCH" == "main" ]]; then
             export HOSTNAME="test.$DOMAIN_URL"
-          elif [[ "$DOCKER_BRANCH" == "preprod" ]]; then
+          elif [[ "$DOCKER_BRANCH" == "staging" ]]; then
             export HOSTNAME="test.$DOCKER_BRANCH.$DOMAIN_URL"
           else
             export HOSTNAME="test.$DOCKER_BRANCH.$DOMAIN_URL"
